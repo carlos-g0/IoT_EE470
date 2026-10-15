@@ -206,6 +206,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`u213865796_db_CGonzalez`@`127.0.0.1` SQL SEC
 --
 ALTER TABLE `sensor_data`
   ADD CONSTRAINT `fk_sensor_register` FOREIGN KEY (`node_name`) REFERENCES `sensor_register` (`node_name`);
+
+
+-- Ensure sensor readings are within valid ranges
+ALTER TABLE sensor_data
+    ADD CONSTRAINT chk_temperature
+        CHECK (temperature BETWEEN -10 AND 100),
+    ADD CONSTRAINT chk_humidity
+        CHECK (humidity BETWEEN 0 AND 100);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
