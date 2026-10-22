@@ -1,0 +1,222 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: Oct 15, 2026 at 11:17 PM
+-- Server version: 11.8.9-MariaDB-log
+-- PHP Version: 7.2.34
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `u213865796_CarlosGonzalez`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Book`
+--
+
+CREATE TABLE `Book` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Book`
+--
+
+INSERT INTO `Book` (`id`, `name`) VALUES
+(1, 'MariaDB Book'),
+(2, 'SQLDB Book'),
+(3, 'MariaDB Book3'),
+(4, 'MariaDB Book4'),
+(5, 'MariaDB Book5');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Price`
+--
+
+CREATE TABLE `Price` (
+  `id` int(11) NOT NULL,
+  `price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Price`
+--
+
+INSERT INTO `Price` (`id`, `price`) VALUES
+(1, 250),
+(2, 252),
+(3, 223),
+(4, 194),
+(5, 305);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `sensor_combined`
+-- (See below for the actual view)
+--
+CREATE TABLE `sensor_combined` (
+`node_name` varchar(10)
+,`time_received` datetime
+,`temperature` decimal(6,2)
+,`humidity` decimal(6,2)
+,`manufacturer` varchar(10)
+,`longitude` decimal(15,8)
+,`latitude` decimal(15,8)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sensor_data`
+--
+
+CREATE TABLE `sensor_data` (
+  `node_name` varchar(10) NOT NULL,
+  `time_received` datetime NOT NULL,
+  `temperature` decimal(6,2) NOT NULL,
+  `humidity` decimal(6,2) NOT NULL
+) ;
+
+--
+-- Dumping data for table `sensor_data`
+--
+
+INSERT INTO `sensor_data` (`node_name`, `time_received`, `temperature`, `humidity`) VALUES
+('node_1', '2022-10-01 11:00:00', 22.50, 45.20),
+('node_1', '2022-10-01 11:30:00', 22.80, 44.90),
+('node_1', '2022-10-01 12:00:00', 23.10, 44.50),
+('node_1', '2022-10-01 12:30:00', 23.40, 44.10),
+('node_2', '2022-10-01 11:00:00', 21.30, 50.10),
+('node_2', '2022-10-01 11:30:00', 21.50, 49.80),
+('node_2', '2022-10-01 12:00:00', 21.80, 49.50),
+('node_2', '2022-10-01 12:30:00', 22.10, 49.20),
+('node_3', '2022-10-01 11:00:00', 24.20, 40.50),
+('node_3', '2022-10-01 11:30:00', 24.40, 40.20),
+('node_3', '2022-10-01 12:00:00', 24.70, 39.80),
+('node_3', '2022-10-01 12:30:00', 25.00, 39.50),
+('node_4', '2022-10-01 11:00:00', 20.10, 55.30),
+('node_4', '2022-10-01 11:30:00', 20.30, 55.00),
+('node_4', '2022-10-01 12:00:00', 20.60, 54.70),
+('node_4', '2022-10-01 12:30:00', 20.90, 54.40),
+('node_5', '2022-10-01 11:00:00', 23.00, 47.50),
+('node_5', '2022-10-01 11:30:00', 23.20, 47.20),
+('node_5', '2022-10-01 12:00:00', 23.50, 46.80),
+('node_5', '2022-10-01 12:30:00', 23.80, 46.50);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sensor_register`
+--
+
+CREATE TABLE `sensor_register` (
+  `node_name` varchar(10) NOT NULL,
+  `manufacturer` varchar(10) NOT NULL,
+  `longitude` decimal(15,8) DEFAULT NULL,
+  `latitude` decimal(15,8) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sensor_register`
+--
+
+INSERT INTO `sensor_register` (`node_name`, `manufacturer`, `longitude`, `latitude`) VALUES
+('node_1', 'Bosch', -122.70000000, 38.40000000),
+('node_2', 'Sensirion', -122.71000000, 38.41000000),
+('node_3', 'Honeywell', -122.72000000, 38.42000000),
+('node_4', 'Adafruit', -122.73000000, 38.43000000),
+('node_5', 'SparkFun', -122.74000000, 38.44000000);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Book`
+--
+ALTER TABLE `Book`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Price`
+--
+ALTER TABLE `Price`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sensor_data`
+--
+ALTER TABLE `sensor_data`
+  ADD PRIMARY KEY (`node_name`,`time_received`);
+
+--
+-- Indexes for table `sensor_register`
+--
+ALTER TABLE `sensor_register`
+  ADD PRIMARY KEY (`node_name`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Book`
+--
+ALTER TABLE `Book`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `Price`
+--
+ALTER TABLE `Price`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `sensor_combined`
+--
+DROP TABLE IF EXISTS `sensor_combined`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`u213865796_db_CGonzalez`@`127.0.0.1` SQL SECURITY DEFINER VIEW `sensor_combined`  AS SELECT `sensor_data`.`node_name` AS `node_name`, `sensor_data`.`time_received` AS `time_received`, `sensor_data`.`temperature` AS `temperature`, `sensor_data`.`humidity` AS `humidity`, `sensor_register`.`manufacturer` AS `manufacturer`, `sensor_register`.`longitude` AS `longitude`, `sensor_register`.`latitude` AS `latitude` FROM (`sensor_data` join `sensor_register` on(`sensor_data`.`node_name` = `sensor_register`.`node_name`)) ;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `sensor_data`
+--
+ALTER TABLE `sensor_data`
+  ADD CONSTRAINT `fk_sensor_register` FOREIGN KEY (`node_name`) REFERENCES `sensor_register` (`node_name`);
+
+
+-- Ensure sensor readings are within valid ranges
+ALTER TABLE sensor_data
+    ADD CONSTRAINT chk_temperature
+        CHECK (temperature BETWEEN -10 AND 100),
+    ADD CONSTRAINT chk_humidity
+        CHECK (humidity BETWEEN 0 AND 100);
+
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
