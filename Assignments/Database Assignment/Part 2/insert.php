@@ -1,4 +1,3 @@
-
 <?php
 // EE 470 Database Assignment - Part 2
 // Receives sensor readings using HTTP GET
