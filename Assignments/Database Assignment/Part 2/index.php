@@ -1,4 +1,3 @@
-
 <?php
 // Connect to the database using the private config file
 require dirname(__DIR__, 2) . '/db_config.php';
@@ -191,7 +190,7 @@ function displayValue($value) {
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="app.js?v=2"></script>
+<script src="app.js?v=4"></script>
 
 </body>
 </html>
